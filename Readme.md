@@ -6,7 +6,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-> **GitHub Copilot** と **GitHub Coding Agent** を活用したモダンな JavaScript アプリケーション開発のためのプロフェッショナルテンプレート
+> **GitHub Copilot** と **GitHub Coding Agent** を活用したモダンな JavaScript アプリケーション開発のためのテンプレートリポジトリ
 
 ## 📋 概要
 
