@@ -95,7 +95,7 @@
 1. **リポジトリのクローン**
 
    ```bash
-   git clone https://github.com/your-username/my-js-app.git
+   git clone https://github.com/tokawa-ms/JSApp-Template-001.git
    cd my-js-app
    ```
 
@@ -177,13 +177,13 @@
 
 - 📖 **ドキュメント**: [GitHub Copilot Docs](https://docs.github.com/en/copilot)
 - 💬 **コミュニティ**: [GitHub Discussions](https://github.com/github/copilot-docs/discussions)
-- 🐛 **Issue 報告**: [Issues](https://github.com/your-username/JSApp-Template-001/issues)
+- 🐛 **Issue 報告**: [Issues](https://github.com/tokawa-ms/JSApp-Template-001/issues)
 
 ## 📊 プロジェクト統計
 
-![GitHub stars](https://img.shields.io/github/stars/your-username/JSApp-Template-001?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-username/JSApp-Template-001?style=social)
-![GitHub issues](https://img.shields.io/github/issues/your-username/JSApp-Template-001)
+![GitHub stars](https://img.shields.io/github/stars/tokawa-ms/JSApp-Template-001?style=social)
+![GitHub forks](https://img.shields.io/github/forks/tokawa-ms/JSApp-Template-001?style=social)
+![GitHub issues](https://img.shields.io/github/issues/tokawa-ms/JSApp-Template-001)
 
 ---
 
