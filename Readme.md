@@ -77,7 +77,7 @@
 
    - リポジトリに新しい Issue を作成
    - 開発要件を詳細に記述
-   - `@github-copilot` で Coding Agent をメンション
+   - `@copilot` で Coding Agent をアサイン
 
 3. **自動開発プロセス**
 
