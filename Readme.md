@@ -96,7 +96,7 @@
 
    ```bash
    git clone https://github.com/tokawa-ms/JSApp-Template-001.git
-   cd my-js-app
+   cd JSApp-Template-001
    ```
 
 2. **開発環境の準備**
