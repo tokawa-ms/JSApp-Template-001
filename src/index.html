@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Monitoring Demo - For Police Officers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'police-blue': '#1e40af',
+                        'warning-red': '#ef4444',
+                        'success-green': '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-police-blue text-white p-4 shadow-lg">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold text-center">
+                🚔 Voice Monitoring Demo - For Police Officers
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 space-y-4 max-h-screen overflow-hidden"">
+
+        <!-- Control Panel -->
+        <section class="bg-white rounded-lg shadow-md p-4">
+            <h2 class="text-lg font-semibold mb-3 text-police-blue">
+                🎛️ Control Panel
+            </h2>
+            
+            <!-- Main Controls -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                <button 
+                    id="startBtn" 
+                    class="bg-success-green text-white px-4 py-2 rounded-md font-semibold hover:bg-green-600 transition duration-200 shadow-md text-sm"
+                >
+                    ▶️ Start
+                </button>
+                <button 
+                    id="stopBtn" 
+                    class="bg-warning-red text-white px-4 py-2 rounded-md font-semibold hover:bg-red-600 transition duration-200 shadow-md text-sm"
+                    disabled
+                >
+                    ⏹️ Stop
+                </button>
+                <button 
+                    id="clearBtn" 
+                    class="bg-gray-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-gray-600 transition duration-200 shadow-md text-sm"
+                >
+                    🗑️ Clear
+                </button>
+                <button 
+                    id="summaryBtn" 
+                    class="bg-police-blue text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-800 transition duration-200 shadow-md text-sm"
+                >
+                    📊 Summary
+                </button>
+            </div>
+
+            <!-- Settings Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Language Settings -->
+                <div class="space-y-2">
+                    <h3 class="text-sm font-medium text-gray-700">Language Settings</h3>
+                    <div class="flex items-center space-x-2">
+                        <label class="text-xs font-medium text-gray-600">Recognition:</label>
+                        <select 
+                            id="languageSelect" 
+                            title="Select recognition language"
+                            class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-police-blue focus:border-transparent text-sm"
+                        >
+                            <option value="en-US">English (US)</option>
+                            <option value="ja-JP">Japanese</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Audio Warning Settings -->
+                <div class="space-y-2">
+                    <h3 class="text-sm font-medium text-gray-700">Audio Warning Settings</h3>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="warningToggle" 
+                                title="Enable/disable warning sounds"
+                                checked 
+                                class="mr-2 w-4 h-4 text-police-blue border-gray-300 rounded focus:ring-police-blue"
+                            >
+                            <label for="warningToggle" class="text-xs font-medium text-gray-600">
+                                Warning
+                            </label>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <label class="text-xs font-medium text-gray-600">Vol:</label>
+                            <input 
+                                type="range" 
+                                id="volumeSlider" 
+                                title="Adjust warning volume"
+                                min="0" 
+                                max="100" 
+                                value="70" 
+                                class="flex-1"
+                            >
+                            <span id="volumeDisplay" class="text-xs text-gray-600 w-8">70%</span>
+                        </div>
+                        <div>
+                            <select 
+                                id="soundSelect" 
+                                title="Select warning sound type"
+                                class="w-full p-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-police-blue focus:border-transparent text-xs"
+                            >
+                                <option value="emergency">Emergency</option>
+                                <option value="attention">Attention</option>
+                                <option value="voice">Voice</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Display -->
+        <section class="bg-white rounded-lg shadow-md p-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-2">
+                        <div id="statusIndicator" class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                        <span id="statusText" class="text-sm font-medium text-gray-600">Ready</span>
+                    </div>
+                    <div id="speakerCount" class="text-sm text-gray-600">Speakers: 0</div>
+                    <div id="riskLevel" class="text-sm text-gray-600">Risk Level: Low</div>
+                </div>
+                <button 
+                    id="testSoundBtn" 
+                    class="bg-gray-300 text-gray-700 px-3 py-1 rounded-md text-sm hover:bg-gray-400 transition duration-200"
+                >
+                    🔊 Test
+                </button>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 h-96">
+            <!-- Transcript Display Area -->
+            <div class="lg:col-span-2">
+                <section class="bg-white rounded-lg shadow-md p-4 h-full">
+                    <h2 class="text-lg font-semibold mb-3 text-police-blue">
+                        💬 Live Transcript
+                    </h2>
+                    <div 
+                        id="transcriptArea" 
+                        class="h-80 overflow-y-auto border border-gray-200 rounded-md p-3 bg-gray-50 space-y-2"
+                    >
+                        <div class="text-gray-500 text-center py-8">
+                            Click "Start" to begin voice monitoring...
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Situation Summary Panel -->
+            <div class="lg:col-span-1">
+                <section class="bg-white rounded-lg shadow-md p-4 h-full">
+                    <h2 class="text-lg font-semibold mb-3 text-police-blue">
+                        📋 Situation Summary
+                    </h2>
+                    <div 
+                        id="summaryArea" 
+                        class="h-80 overflow-y-auto border border-gray-200 rounded-md p-3 bg-gray-50"
+                    >
+                        <div class="text-gray-500 text-center py-8">
+                            No summary available.<br>
+                            Click "Summary" to analyze the conversation.
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-police-blue mx-auto mb-4"></div>
+            <p class="text-lg font-medium text-gray-700">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Audio Elements for Warning Sounds -->
+    <audio id="emergencySound" preload="auto">
+        <source src="assets/sounds/emergency-beep.mp3" type="audio/mpeg">
+        <source src="assets/sounds/emergency-beep.wav" type="audio/wav">
+    </audio>
+    <audio id="attentionSound" preload="auto">
+        <source src="assets/sounds/attention-beep.mp3" type="audio/mpeg">
+        <source src="assets/sounds/attention-beep.wav" type="audio/wav">
+    </audio>
+    <audio id="voiceSound" preload="auto">
+        <source src="assets/sounds/voice-warning.mp3" type="audio/mpeg">
+        <source src="assets/sounds/voice-warning.wav" type="audio/wav">
+    </audio>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-2 mt-4">
+        <p class="text-xs">
+            ⚠️ Demo Application - For Educational Purposes Only | 
+            All rights reserved © 2025
+        </p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
