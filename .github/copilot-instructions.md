@@ -84,3 +84,5 @@ root/
 - 技術要件に関するドキュメント
 - Issue の説明
 - Pull Request の説明
+- Mermaid による UI フロー図
+- Mermaid による ER 図
